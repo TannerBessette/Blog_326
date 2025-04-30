@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Blog_326",
+    "section": "",
+    "text": "test test test\n(maps to home page)\nFor this option, you will create a Quarto Blog/Website containing your 5 mini-projects, and write a reflection that ties the mini-projects together and gives biggest take-aways from each project.\nYour reflection should either go in the about.qmd file that appears at the root directory of the R Project, the index.qmd file that also appears at the root directory of the R Project, or in a separate blog post. The rendered .html file from about.qmd essentially serves as the home page for the blog. The reflection should be about 5 paragraphs or so and should address:"
+  },
+  {
+    "objectID": "index.html#biggest-take-aways-from-my-mini-projects-this-semester",
+    "href": "index.html#biggest-take-aways-from-my-mini-projects-this-semester",
+    "title": "Blog_326",
+    "section": "Biggest Take-aways from my Mini-Projects this semester:",
+    "text": "Biggest Take-aways from my Mini-Projects this semester:\nMini-Project 1\n\nmaybe: this is the groundwork for everything we did in this course (along with probability)\n\nMini-Project 2\nMini-Project 2 asked us to write a meaningful story using the terms that we have been using in class. This was a fun mini-project, becuase it forced me to take classroom statistical concepts and apply them to a real-world setting, and I chose to utilize them in a story about one of my favorite things - sports! My biggest take-away from this mini-project was the similarities/differences with how we use words day-to-day and what they mean in a statistical context. Specifically, terms like variance and random sample mean essentially the same thing that you would expect, but terms like consistent and likelihood mean different things than we would expect! In a typical day-to-day setting, we would use consistent to mean a pattern that is repeated the same, and likelihood to mean the chances that something happens. In a mathematical statistics framework, we use consistency to mean that as n approaches infinity, the probability is 100% that our estimator produces a number very close to the true \\(\\theta\\), and likelihood refers to a function that is equal to a product of probability densities for each \\(x_i\\). This mini-project helped me to conceptually fully understand all the things that we calculated and visualized in Mini-Project 1 more thoroughly.\nMini-Project 3\nMini-Project 3 was an important conceptual project. This mini-project showed us how changing sample sizes between small/medium/large and p close and far from 0.5 changed coverage rates and average interval widths. It incorporated running a large number of simulations which we have done in units throughout the semester, and we looked at sampling distributions as well which is also a fundamental concept to most units in Mathematical Statistics this semester. This project demonstrated with real data an important idea: if we have a large enough n, our confidence interval coverage rate will be extremely close to our confidence level, and the average interval width will be smaller. Utilizing a small n sacrifices on coverage rate, and leads to wider interval widths. We discussed confidence intervals and an article relating to p-values in Mini-Project 5.\nMini-Project 4\nMini-Project 4 was more of a “stand-alone” project compared to the other ones, because section 4 was the only section in which we thought about statistics within a Bayesian framework instead of a frequentist approach."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  }
+]
