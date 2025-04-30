@@ -11,25 +11,11 @@ page-layout: full
 title-block-banner: true
 ---
 
-test test test
-
-(maps to home page)
-
-For this option, you will create a Quarto Blog/Website containing your 5 mini-projects, and write a reflection that ties the mini-projects together and gives biggest take-aways from each project.
-
-Your reflection should either go in the about.qmd file that appears at the root directory of the R Project, the index.qmd file that also appears at the root directory of the R Project, or in a separate blog post. The rendered .html file from about.qmd essentially serves as the home page for the blog. The reflection should be about 5 paragraphs or so and should address:
-
-- how each mini-project ties in to other content in the course.
-
-- how each mini-project ties in with some other mini-projects (note that some mini-projects are more connected than others: you do not need to “connect” every single mini-project with every other mini-project).
-
-- your biggest take-aways from these mini-projects (these should not be copy-pasted from the “take-away” section of any of your original mini-projects: the expectation is that, now that we have gone through the entire course, your take-aways may be more sophisticated now).
-
 ## Biggest Take-aways from my Mini-Projects this semester:
 
 **Mini-Project 1**
 
-- maybe: this is the groundwork for everything we did in this course (along with probability)
+Mini-Project 1 laid the groundwork for being able to do nearly everything that we did in Mathematical Statistics this year. In this project, we created sampling distributions for the sample minimum and sample maximum from Normal, Uniform, Beta, and Exponential distributions. These are the distributions that we used most often this semester, and it was important to be able to visually see them and conceptually understand them at the start of the semester, so that we could later incorporate them with things like MLE's, MOM's, confidence intervals, and hypothesis testing. A couple of take-aways from this project was that for Normal and Exponential Distributions, we expect $SE(Y_{min})$ and $SE(Y_{max})$ to be the same, whereas we expect $SE(Y_{max})$ to be significantly higher than $SE(Y_{min})$ for the Exponential distribution, and we expect $SE(Y_{min})$ to be significantly higher than $SE(Y_{max})$ for the Beta distribution.
 
 **Mini-Project 2**
 
@@ -41,7 +27,11 @@ Mini-Project 3 was an important conceptual project. This mini-project showed us 
 
 **Mini-Project 4**
 
-Mini-Project 4 was more of a "stand-alone" project compared to the other ones, because section 4 was the only section in which we thought about statistics within a Bayesian framework instead of a frequentist approach.
+Mini-Project 4 was more of a "stand-alone" project compared to the other ones, because section 4 was the only section in which we thought about statistics within a Bayesian framework instead of with a frequentist approach. Specifically, in this project we looked at the likelihood that Nadal wins a point on his serve against Djokovic. This mini-project gave us experience doing the complete Bayesian analysis from start to finish by ourselves, using different priors and learning about how they affect the posteriors. One of the biggest takeaways from me was that the stronger the prior beliefs are, the higher the alpha and beta parameters will be, and the less the posterior will be updated. Unless you have a truly valid reason for having such strong prior beliefs, then I think it is smarter to stay on the more cautious side, so that the posterior is actually updated by real data. In this project we saw the commentator be extremely confident about the proportion of serves he knew Nadal was going to win, and the actual observed data essentially changed nothing in the posterior.
+
+**Mini-Project 5**
+
+For Mini-Project 5, we looked at an article that insisted that p-values should not hold nearly the weight that they do in statistics and in science. This mini-project conceptually related to every unit we have done in Mathematical Statistics, because each unit we have worked with either p-values, confidence levels, or other very specific statistical parameters that we have used to determine whether something was "significant" or not. This article also discusses that we should not just look at one statistic and let that be the sole determining factor in whether we say we have found something in research. Throughout this course, even though we have used p-values extremely frequently, we incorporate plots to visualize trends as well, and we usually use multiple statistics in our calculation process, instead of just a p-value. It is important to recognize that despite how much we use p-values in statistics, it is dangerous to use it as your only piece of evidence when considering publishing research.
 
 
 

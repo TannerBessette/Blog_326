@@ -25,9 +25,9 @@ I will be answering this question using Bayesian analyses with three priors: a n
 
 Want $\mu = 46/66 = 0.69697$, so $46/66 = \alpha / (\alpha + \beta)$
 
---> $46/66 * (\alpha + \beta) = \alpha$
+--\> $46/66 * (\alpha + \beta) = \alpha$
 
---> $46/66 * \beta = 20/66 * \alpha$
+--\> $46/66 * \beta = 20/66 * \alpha$
 
 and want $\sigma = 0.05657$.
 
@@ -54,14 +54,13 @@ param_df |> filter(dist_to_target == min(dist_to_target))
 
 So, for the informative prior based on a clay-court match the two played in the previous year, we will use: Beta(45.3, 19.7).
 
-
-**Informative prior based on a sports announcer, who claims that they think Nadal wins about 75% of the points on his serve against Djokovic. They are also “almost sure” that Nadal wins no less than 70% of his points on serve against Djokovic:**
+**Informative prior based on a sports announcer, who claims that they think Nadal wins about 75% of the points on his serve against Djokovic. They are also "almost sure" that Nadal wins no less than 70% of his points on serve against Djokovic:**
 
 Want $\mu = 0.75$, so $\alpha / (\alpha + \beta) = 0.75$
 
---> $0.75 * (\alpha + \beta)$ = $\alpha$
+--\> $0.75 * (\alpha + \beta)$ = $\alpha$
 
---> $0.75 * \beta$ $=$ $0.25 * \alpha$
+--\> $0.75 * \beta$ $=$ $0.25 * \alpha$
 
 (We will treat "almost sure" as a $0.02$ chance)
 
@@ -83,15 +82,16 @@ So, for the informative prior with Nadal winning 75% of the points on his serves
 
 **What did I assume when I made these priors?**
 
-For both of the informative priors, we are assuming independence of each serve, and that there is no effect of player momentum, fans, or weather on whether or not Nadal wins his serve. 
+For both of the informative priors, we are assuming independence of each serve, and that there is no effect of player momentum, fans, or weather on whether or not Nadal wins his serve.
 
-For the informative prior based on the previous year's match, we are assuming that this game last year is indicative of the players' abilities in the French Open this year. 
+For the informative prior based on the previous year's match, we are assuming that this game last year is indicative of the players' abilities in the French Open this year.
 
 For the sports announcer informative prior, we are assuming that it is okay to use 0.98 as "almost sure", and we are assuming that the sports announcer is well-educated on tennis.
 
 ## Graph of three priors
 
 Code for graphing priors:
+
 ```{r}
 library(tidyverse)
 ps <- seq(0, 1, length.out = 1000)
@@ -126,18 +126,18 @@ ggplot(data = prior_plot, aes(x = ps, y = density,
   labs(x = "p")
 ```
 
-
 ## Graph of three posteriors (and work to obtain them)
 
 Now, we want to use the 2020 French Open data to update our prior for the probability that Nadal wins a point on serve. In that tournament, the two players played in the final. In that final, Nadal served 84 points and won 56 of those points.
 
 **Work for non-informative posterior:**
 
-Beta(1,1) --> Beta(1 + 56, 1 + 84 - 56) --> Beta(57, 29) is the posterior distribution.
+Beta(1,1) --\> Beta(1 + 56, 1 + 84 - 56) --\> Beta(57, 29) is the posterior distribution.
 
 Posterior mean: 57 / (57 + 29) = 57/86 = 0.6628
 
 90% credible interval for p:
+
 ```{r}
 c(qbeta(0.025, 57, 29), qbeta(0.975, 57, 29))
 ```
@@ -146,12 +146,12 @@ According to our model, there is a 90% chance that the proportion of serves that
 
 **Work for informative posterior based on last year's match:**
 
-Beta(45.3, 19.7) --> Beta(45.3 + 56, 19.7 + 84 - 56) --> 
-Beta(101.3, 47.7) is the posterior distribution.
+Beta(45.3, 19.7) --\> Beta(45.3 + 56, 19.7 + 84 - 56) --\> Beta(101.3, 47.7) is the posterior distribution.
 
 Posterior mean: 101.3 / (101.3 + 47.7) = 0.6798658
 
 90% credible interval for p:
+
 ```{r}
 c(qbeta(0.025, 101.3, 47.7), qbeta(0.975, 101.3, 47.7))
 ```
@@ -160,11 +160,12 @@ According to our model, there is a 90% chance that the proportion of serves that
 
 **Work for informative posterior based on announcer:**
 
-Beta(252, 84) --> Beta(252 + 56, 84 + 84 - 56) --> Beta(308, 112) is the posterior distribution.
+Beta(252, 84) --\> Beta(252 + 56, 84 + 84 - 56) --\> Beta(308, 112) is the posterior distribution.
 
 Posterior mean: 308 / (308 + 112) = 0.7333
 
 90% credible interval for p:
+
 ```{r}
 c(qbeta(0.025, 308, 112), qbeta(0.975, 308, 112))
 ```
@@ -172,6 +173,7 @@ c(qbeta(0.025, 308, 112), qbeta(0.975, 308, 112))
 According to our model, there is a 90% chance that the proportion of serves that Nadal would win is between 0.6901 and 0.7745.
 
 **Code for graphing posteriors:**
+
 ```{r}
 library(tidyverse)
 ps <- seq(0, 1, length.out = 1000)
@@ -218,17 +220,10 @@ If I had to choose one posterior, I would choose the one that had the prior of t
 
 **The variance of each posterior should be different. Why do you think one posterior has a lower variance than the other two?**
 
-One posterior has a lower variance than the other two: the announcer's informative posterior. This is because the prior had specific requirements that needed to be met, which meant the alpha and beta parameters of the prior were extremely large - 252 and 84, so there is a higher level of confidence. 
+One posterior has a lower variance than the other two: the announcer's informative posterior. This is because the prior had specific requirements that needed to be met, which meant the alpha and beta parameters of the prior were extremely large - 252 and 84, so there is a higher level of confidence.
 
 ## Brief conclusion of what I found in this mini-project
 
 From the three posteriors, it appears that Nadal would win between 65% and 75% of his serves against Djokovic. The prior that had much higher alpha and beta parameters (announcer's) has much lower variance in the posterior than the non-informative, or the one based on last year's match data. The stronger the prior beliefs are, the less the posterior will be updated by real data.
 
 I think one takeaway is also that it is more reliable to trust real data, or to use a non-informative prior, rather than being overly confident in the precision of somebody's subjective guess.
-
-
-
-
-
-
-
