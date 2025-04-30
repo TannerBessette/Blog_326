@@ -1,0 +1,12 @@
+---
+title: "Mini-Project 2: A Meaningful Story"
+author: "Tanner Bessette"
+date: "02-19-2025"
+format: pdf
+---
+
+All work presented is my own, and I have followed all rules for collaboration. I have not used generative AI on this project. Tanner Bessette
+
+The Red Sox clearly need something new in 2025, to shake things up, to do something that no baseball team has ever done! They have decided that instead of calling up specific players from their Minor League teams, they will take a **random sample** from each Minor League team, and call up 3 players from each team, with all being given the same chance, and not basing it off of last season's performance. How good are they going to be? The coaches decided it would be fair to use an **estimator** to calculate an **estimate** for what their 2025 batting averages are going to be, they decided to use their Minor League batting averages as predictions of what they will hit in the MLB (i.e. a .250 hitter in the Minors will hit .250 in the MLB in 2025 for the Red Sox). After looking at some data, it appeared to the Red Sox scouting team that the **random variable** representing Minor League players' batting averages follow a normal distribution, with a mean right around .250. They determined that the **likelihood** that any of these hitters hit above .300 at the next level was nearly zero. The expectation was that these guys would not be **consistent**, they would likely have a season full of ups and downs and learning experiences. There also was likely going to be a high **variance** in the statistics among the players, some are power hitters and hit a lot of home runs while some hit very few, some are fast and steal a lot of bases, while others are larger and slower.
+
+After the 2025 season began, the Red Sox believed that there was likely a **bias** in using player's Minor League batting averages to predict their Major League batting averages. They determined they were overestimating how the players would perform in the big leagues, but the exact bias is still unknown. The Red Sox didn't necessarily care, the **parameter** they decided to use to determine if their new strategy for calling up young players was successful: win percentage.

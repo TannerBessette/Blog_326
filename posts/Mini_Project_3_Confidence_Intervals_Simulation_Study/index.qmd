@@ -1,0 +1,286 @@
+---
+title: "Mini-Project 3: Confidence Intervals Simulation Study"
+author: "Tanner Bessette"
+date: "03-05-2025"
+format: pdf
+---
+
+I have followed all rules for collaboration for this project, and I have not used generative AI on this project. Tanner Bessette
+
+## Step 1
+
+3 different sample sizes:
+
+small: n = 5
+
+medium: n = 40
+
+large: n = 1000
+
+2 different values for p:
+
+p = 0.5 and p = 0.1
+
+## Steps 2,3,4
+
+## Large n (n = 1000) and p = 0.5
+
+```{r}
+library(tidyverse)
+
+n <- 1000
+p <- 0.5
+
+generate_samp_prop <- function(n, p) {
+  x <- rbinom(1,n,p)
+  
+  # number of successes divided by sample size
+  phat <- x / n
+  
+  # we have to use 1.645 instead of 1.96 bc 90% confidence
+  lb <- phat - 1.645 * sqrt(phat * (1 - phat) / n)
+  ub <- phat + 1.645 * sqrt(phat * (1 - phat) / n)
+  
+  prop_df <- tibble(phat, lb, ub)
+  return(prop_df)
+}
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 1000, p = 0.5)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 1000, p = 0.5)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 1000 and p = 0.5, we have an average interval width of 0.0520, and a coverage rate of 89.5%.
+
+## Large n (n = 1000) and p = 0.1
+
+```{r}
+n <- 1000
+p <- 0.1
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 1000, p = 0.1)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 1000, p = 0.1)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 1000 and p = 0.1, we have an average interval width of 0.0312, and a coverage rate of exactly 90%.
+
+## Medium n (n = 40) and p = 0.5
+
+```{r}
+n <- 40
+p <- 0.5
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 40, p = 0.5)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 40, p = 0.5)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 40 and p = 0.5, we have an average interval width of 0.257, and a coverage rate of 91.7%.
+
+## Medium n (n = 40) and p = 0.1
+
+```{r}
+n <- 40
+p <- 0.1
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 40, p = 0.1)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 40, p = 0.1)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 40 and p = 0.1, we have an average interval width of 0.150, and a coverage rate of 90.6%.
+
+## Small n (n = 5) and p = 0.5
+
+```{r}
+n <- 5
+p <- 0.5
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 5, p = 0.5)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 5, p = 0.5)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 5 and p = 0.5, we have an average interval width of 0.634, and a coverage rate of 62.6%.
+
+## Small n (n = 5) and p = 0.1
+
+```{r}
+n <- 5
+p <- 0.1
+
+# run the function with our assigned n and p values
+generate_samp_prop(n = 5, p = 0.1)
+
+# we want 5000 ci's
+n_sim = 5000
+
+prop_ci_df <- map(1:n_sim,
+    \(i) generate_samp_prop(n = 5, p = 0.1)) |>
+  bind_rows()
+
+prop_ci_df
+
+prop_ci_df <- prop_ci_df |> mutate(ci_width = ub - lb,
+             ci_cover_ind = if_else(p > lb & p < ub,
+                                             true = 1, 
+                                             false = 0))
+
+# output the average interval widths and the coverage rates
+prop_ci_df |> summarise(avg_width = mean(ci_width),
+                        coverage_rate = mean(ci_cover_ind))
+```
+
+For n = 5 and p = 0.1, we have an average interval width of 0.253, and a coverage rate of 40.1%.
+
+## Table
+
+|           |               | $n = 5$ | $n = 40$ | $n=1000$ |
+|:---------:|:-------------:|:-------:|:--------:|:--------:|
+| $p = 0.5$ | Coverage Rate |  62.6%  |  91.7%   |  89.5%   |
+| $p = 0.1$ | Coverage Rate |  40.1%  |  90.6%   |   90%    |
+|           |               |         |          |          |
+| $p = 0.5$ | Average Width |  0.634  |  0.253   |  0.052   |
+| $p = 0.1$ | Average Width |  0.253  |  0.150   |  0.0312  |
+
+: Table of Results {.striped .hover}
+
+## Large Sample Assumption Calculations
+
+Check that:
+
+$n$ \* $\hat{p}$ \> 10 and $n$ \* $(1 - \hat{p})$ \> 10
+
+are both satisfied for the large sample assumption to hold.
+
+**Setting 1: Large n (n = 1000) and p = 0.5**
+
+1000 \* 0.5 \> 10 and 1000 \* (1 - 0.5) \> 10 both true
+
+So, the large sample assumption holds.
+
+**Setting 2: Large n (n = 1000) and p = 0.1**
+
+1000 \* 0.1 \> 10 and 1000 \* (1 - 0.1) \> 10 both true
+
+So, the large sample assumption holds.
+
+**Setting 3: Medium n (n = 40) and p = 0.5**
+
+40 \* 0.5 = 20 \> 10 and 40 \* (1 - 0.5) = 20 \> 10 both true
+
+So, the large sample assumption holds.
+
+**Setting 4: Medium n (n = 40) and p = 0.1**
+
+40 \* 0.1 = 4 \< 10
+
+So, the large sample assumption does not hold.
+
+**Setting 5: Small n (n = 5) and p = 0.5**
+
+5 \* 0.5 = 2.5 \< 10
+
+So, the large sample assumption does not hold.
+
+**Setting 6: Small n (n = 5) and p = 0.1**
+
+5 \* 0.1 = 0.5 \< 10
+
+So, the large sample assumption does not hold.
+
+## Mini-Project Summary
+
+Generally, the bigger the sample size n, the smaller the average width. The smaller the sample size, the larger the average width, especially with our extremely low sample size (n = 5), where we had average widths of 0.634 (p = 0.5) and 0.253 (p = 0.1)! For all of the different n's, the simulations yielded a larger average width for p = 0.5 than for p = 0.1 (about twice as large of a width for p = 0.5 than p = 0.1).
+
+From our large sample assumption calculations, the settings that have sufficiently large n are *n = 1000 and p = 0.5*, *n = 1000 and p = 0.1*, and *n = 40 and p = 0.5*. For these settings, we are able to interpret: "We are 90% confident that the true population proportion p is contained within our confidence intervals." The settings that do not have sufficiently large n are *n = 40 and p = 0.1*, *n = 5 and p = 0.5*, and *n = 5 and p = 0.1*. In these settings, we do not have a large enough n to trust the confidence interval to be reliable.
+
+With n = 1000 and n = 40 the coverage rates are extremely close to 90%, which is our confidence interval. For n = 1000 and p = 0.5, the coverage rate is likely only 89.5% (and not 90%) due to random variation. When the n is too small, i.e. n = 5, the coverage rate also goes way down (far below 90% coverage). This is likely in part due to the fact that these two settings weren't even close to satisfying the large sample assumption.
+
+The overall takeaway is that if we get a large enough n, we can have a coverage rate very close, if not exactly equal to, our confidence level, and the average width will be smaller with higher n. With a smaller n, we lose some of the accuracy in coverage rate, and the interval widths grow larger.
